@@ -45,11 +45,10 @@
 
 html, body {
   height: 100%;
-  /* Use dvh for modern browsers, fallback to vh for older ones */
-  height: 100dvh;
-  /* Allow scroll in children but prevent body scroll */
-  overflow: hidden;
-  overflow: clip;
+  min-height: 100dvh;
+  /* Allow scrolling */
+  overflow-x: hidden;
+  overflow-y: auto;
   /* Fix for Yandex Browser and other mobile browsers */
   min-height: -webkit-fill-available;
   /* Enable touch scrolling */
