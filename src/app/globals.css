@@ -1,0 +1,802 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Vauvision Brand Colors - Light Theme */
+:root,
+[data-theme="light"] {
+  --black: #131313;
+  --white: #ffffff;
+  --bg-light: #f5f5f5;
+  --bg-card: #ffffff;
+  --beige: #e4dfd8;
+  --vinous: #ab1115;
+  --yellow: #e2b63f;
+  --text-primary: #131313;
+  --text-secondary: #666666;
+  --text-muted: #999999;
+  --border: rgba(19, 19, 19, 0.1);
+  --accent: #ab1115;
+  --accent-yellow: #e2b63f;
+}
+
+/* Vauvision Brand Colors - Dark Theme */
+[data-theme="dark"] {
+  --black: #131313;
+  --white: #ffffff;
+  --bg-light: #0a0a0a;
+  --bg-card: #1a1a1a;
+  --beige: #2a2520;
+  --vinous: #d41920;
+  --yellow: #e2b63f;
+  --text-primary: #e5e5e5;
+  --text-secondary: #a0a0a0;
+  --text-muted: #707070;
+  --border: rgba(255, 255, 255, 0.1);
+  --accent: #d41920;
+  --accent-yellow: #e2b63f;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  /* Use dvh for modern browsers, fallback to vh for older ones */
+  height: 100dvh;
+  /* Allow scroll in children but prevent body scroll */
+  overflow: hidden;
+  overflow: clip;
+  /* Fix for Yandex Browser and other mobile browsers */
+  min-height: -webkit-fill-available;
+  /* Enable touch scrolling */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Fix for mobile viewport issues */
+@supports (height: 100dvh) {
+  html, body {
+    height: 100dvh;
+  }
+}
+
+/* Fallback for browsers without dvh support */
+@supports not (height: 100dvh) {
+  html, body {
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+  }
+}
+
+body {
+  background: var(--bg-light);
+  color: var(--text-primary);
+  font-family: 'Liberation Sans', Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== TAP BUTTON (Vauvision Style) ===== */
+.tap-button-container {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Prevent iOS text selection and callout */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+/* Rotating rings - Vauvision style */
+.tap-rings {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.tap-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid transparent;
+}
+
+.tap-ring-1 {
+  border-color: rgba(171, 17, 21, 0.25);
+  border-top-color: transparent;
+  border-left-color: transparent;
+  animation: ring-spin-1 6s linear infinite;
+}
+
+.tap-ring-2 {
+  inset: 12px;
+  border-color: rgba(171, 17, 21, 0.15);
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+  animation: ring-spin-2 8s linear infinite reverse;
+}
+
+.tap-ring-3 {
+  inset: 24px;
+  border-color: rgba(19, 19, 19, 0.08);
+  border-top-color: transparent;
+  border-right-color: transparent;
+  animation: ring-spin-3 10s linear infinite;
+}
+
+@keyframes ring-spin-1 {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes ring-spin-2 {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes ring-spin-3 {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Glow backdrop - Vauvision Light */
+.tap-glow {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(171, 17, 21, 0.12) 0%,
+    rgba(171, 17, 21, 0.05) 50%,
+    transparent 70%
+  );
+  filter: blur(25px);
+  transition: all 0.2s ease;
+  animation: glow-breathe 3s ease-in-out infinite;
+}
+
+@keyframes glow-breathe {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.1); }
+}
+
+/* Main button - Vauvision Light */
+.tap-button-2026 {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 3px solid var(--vinous);
+  cursor: pointer;
+  position: relative;
+  z-index: 5;
+  /* Prevent iOS text selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  background: var(--white);
+  box-shadow:
+    0 0 0 1px rgba(171, 17, 21, 0.2),
+    0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.15s ease;
+  overflow: hidden;
+  animation: button-pulse 2s ease-in-out infinite;
+}
+
+@keyframes button-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 1px rgba(171, 17, 21, 0.2),
+      0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(171, 17, 21, 0.4),
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      0 0 30px rgba(171, 17, 21, 0.15);
+  }
+}
+
+.tap-button-2026:active {
+  transform: scale(0.92) !important;
+  background: rgba(171, 17, 21, 0.05);
+  box-shadow:
+    0 0 0 2px var(--vinous),
+    0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.tap-button-2026.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  animation: none;
+}
+
+.tap-button-2026.disabled .tap-ring {
+  animation-play-state: paused;
+  opacity: 0.3;
+}
+
+/* Button inner content - Vauvision */
+.tap-button-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.tap-text {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--vinous);
+  text-transform: uppercase;
+}
+
+.tap-subtext {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-top: 4px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Inner shine effect */
+.tap-shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+  animation: shine-sweep 3s ease-in-out infinite;
+  border-radius: 50%;
+}
+
+@keyframes shine-sweep {
+  0%, 100% { left: -100%; }
+  50% { left: 100%; }
+}
+
+/* Holding state styles - Vauvision Light */
+.tap-button-2026.holding {
+  background: rgba(226, 182, 63, 0.1);
+  border-color: var(--yellow);
+  box-shadow:
+    0 0 0 2px var(--yellow),
+    0 5px 30px rgba(226, 182, 63, 0.25);
+  animation: none;
+}
+
+.tap-ring.holding {
+  animation-duration: 1.5s !important;
+  border-color: rgba(226, 182, 63, 0.8) !important;
+}
+
+.tap-glow.holding {
+  background: radial-gradient(
+    circle,
+    rgba(226, 182, 63, 0.4) 0%,
+    rgba(171, 17, 21, 0.2) 50%,
+    transparent 70%
+  ) !important;
+}
+
+.tap-text.holding {
+  color: var(--yellow) !important;
+  font-size: 28px;
+}
+
+/* Holding pulse ring - Vauvision */
+.tap-holding-pulse {
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  border: 2px solid rgba(226, 182, 63, 0.6);
+  animation: holding-pulse 1s ease-out infinite;
+}
+
+@keyframes holding-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+/* Subtext during holding shows timer - Vauvision */
+.tap-button-2026.holding .tap-subtext {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--yellow);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+}
+
+/* ===== TIMER SPARKLES ===== */
+.timer-display {
+  position: relative;
+}
+
+.timer-display.pulse {
+  animation: timer-pulse 0.3s ease-out;
+}
+
+@keyframes timer-pulse {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.2);
+    filter: brightness(1.5);
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
+.timer-sparkles {
+  position: absolute;
+  inset: -20px;
+  pointer-events: none;
+}
+
+.timer-sparkles .sparkle {
+  position: absolute;
+  font-size: 14px;
+  animation: sparkle-fly 0.4s ease-out forwards;
+  text-shadow: 0 0 10px currentColor;
+}
+
+.timer-sparkles .s1 {
+  top: 0;
+  left: 50%;
+  color: var(--yellow);
+  animation-delay: 0s;
+}
+
+.timer-sparkles .s2 {
+  top: 50%;
+  right: 0;
+  color: var(--white);
+  animation-delay: 0.05s;
+}
+
+.timer-sparkles .s3 {
+  bottom: 0;
+  left: 50%;
+  color: var(--vinous);
+  animation-delay: 0.1s;
+}
+
+.timer-sparkles .s4 {
+  top: 50%;
+  left: 0;
+  color: var(--yellow);
+  animation-delay: 0.15s;
+}
+
+@keyframes sparkle-fly {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx, 0), var(--ty, -20px)) scale(0.5);
+  }
+}
+
+.timer-sparkles .s1 { --tx: 0; --ty: -25px; }
+.timer-sparkles .s2 { --tx: 25px; --ty: 0; }
+.timer-sparkles .s3 { --tx: 0; --ty: 25px; }
+.timer-sparkles .s4 { --tx: -25px; --ty: 0; }
+
+/* Enhanced glow during holding - Vauvision */
+.tap-glow.holding {
+  animation: glow-intensity 0.5s ease-in-out infinite !important;
+}
+
+@keyframes glow-intensity {
+  0%, 100% {
+    filter: blur(20px) brightness(1);
+  }
+  50% {
+    filter: blur(25px) brightness(1.2);
+  }
+}
+
+/* Ring colors during holding - Vauvision */
+.tap-ring-1.holding {
+  border-color: rgba(171, 17, 21, 0.5) !important;
+}
+
+.tap-ring-2.holding {
+  border-color: rgba(171, 17, 21, 0.35) !important;
+}
+
+.tap-ring-3.holding {
+  border-color: rgba(171, 17, 21, 0.2) !important;
+}
+
+/* Legacy tap button for fallback */
+.tap-button {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-purple) 100%);
+  border: none;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 0 60px rgba(0, 212, 255, 0.4);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  overflow: visible;
+}
+
+.tap-button:active {
+  transform: scale(0.92);
+  box-shadow: 0 0 80px rgba(0, 212, 255, 0.6);
+}
+
+.tap-button::before {
+  content: '';
+  position: absolute;
+  inset: -15px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.3) 0%, transparent 70%);
+  animation: pulse-ring 2s infinite;
+}
+
+@keyframes pulse-ring {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.15); opacity: 0; }
+}
+
+/* Ripple effect */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(0);
+  animation: ripple-effect 0.6s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes ripple-effect {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* ===== CARD - Vauvision Light ===== */
+.glass-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* ===== GRADIENT BUTTON (Vauvision Style) ===== */
+.btn-gradient {
+  background: var(--vinous);
+  color: white;
+  font-weight: 700;
+  padding: 16px 32px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+}
+
+.btn-gradient:hover {
+  background: #c91418;
+  transform: translateY(-1px);
+}
+
+.btn-gradient:active {
+  transform: scale(0.98);
+}
+
+.btn-gradient:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Secondary button (Vauvision Light Style) */
+.btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  font-weight: 500;
+  padding: 12px 20px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: var(--text-secondary);
+}
+
+.btn-secondary:active {
+  transform: scale(0.98);
+}
+
+/* ===== INPUT (Vauvision Light Style) ===== */
+.input-glass {
+  width: 100%;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 14px 16px;
+  color: var(--text-primary);
+  font-size: 16px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.input-glass:focus {
+  border-color: var(--vinous);
+  box-shadow: 0 0 0 3px rgba(171, 17, 21, 0.1);
+}
+
+.input-glass::placeholder {
+  color: var(--text-muted);
+}
+
+/* ===== PROGRESS BAR - Vauvision Light ===== */
+.progress-bar {
+  height: 4px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--vinous);
+  border-radius: 0;
+  transition: width 0.1s linear;
+}
+
+/* ===== LYRICS LINE - Vauvision Light ===== */
+.lyrics-line {
+  padding: 12px 16px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  color: var(--text-primary);
+}
+
+.lyrics-line:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.lyrics-line.active {
+  background: rgba(171, 17, 21, 0.08);
+  color: var(--vinous);
+  border-left-color: var(--vinous);
+}
+
+.lyrics-line.done {
+  color: var(--text-muted);
+  border-left-color: var(--yellow);
+}
+
+.lyrics-line.editing {
+  background: rgba(226, 182, 63, 0.1);
+  border-left-color: var(--yellow);
+  color: #b8860b;
+}
+
+/* ===== SCORE FLYUP - Vauvision Light ===== */
+.score-flyup {
+  position: fixed;
+  font-weight: bold;
+  font-size: 20px;
+  color: var(--vinous);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  animation: flyup 0.8s ease-out forwards;
+  z-index: 100;
+}
+
+@keyframes flyup {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-50px) scale(1.1);
+  }
+}
+
+/* ===== FINE TUNE SLIDER - Vauvision Light ===== */
+.fine-tune-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  outline: none;
+}
+
+.fine-tune-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--vinous);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.fine-tune-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: var(--vinous);
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+/* ===== STAR RATING ===== */
+.star {
+  transition: all 0.3s ease;
+}
+
+.star.filled {
+  color: #fbbf24;
+  filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.6));
+}
+
+.star.empty {
+  color: rgba(0, 0, 0, 0.15);
+}
+
+/* ===== PREVIEW HIGHLIGHT ===== */
+.lyrics-line.highlight {
+  background: linear-gradient(90deg, rgba(0, 212, 255, 0.3), rgba(168, 85, 247, 0.3));
+  color: white;
+  transform: scale(1.02);
+}
+
+/* ===== HIDE SCROLLBAR ===== */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ===== SCROLLABLE AREAS ===== */
+.overflow-y-auto {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* ===== MODAL OVERLAY ===== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  animation: fade-in 0.2s ease;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Undo button removed - using inline styles */
+
+/* ===== ONBOARDING ANIMATIONS ===== */
+@keyframes animate-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: animate-fade-in 0.6s ease-out forwards;
+}
+
+/* Sound wave animation */
+.sound-wave-container {
+  position: relative;
+  width: 280px;
+  height: 80px;
+}
+
+.sound-wave {
+  overflow: visible;
+}
+
+.wave-path {
+  stroke-linecap: round;
+}
+
+.wave-1 {
+  animation: wave-move-1 2s ease-in-out infinite;
+}
+
+.wave-2 {
+  animation: wave-move-2 2s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+.wave-3 {
+  animation: wave-move-3 1.5s ease-in-out infinite;
+  animation-delay: 0.25s;
+}
+
+@keyframes wave-move-1 {
+  0%, 100% {
+    d: path("M0,40 Q35,10 70,40 T140,40 T210,40 T280,40");
+  }
+  50% {
+    d: path("M0,40 Q35,70 70,40 T140,40 T210,40 T280,40");
+  }
+}
+
+@keyframes wave-move-2 {
+  0%, 100% {
+    d: path("M0,40 Q35,70 70,40 T140,40 T210,40 T280,40");
+  }
+  50% {
+    d: path("M0,40 Q35,10 70,40 T140,40 T210,40 T280,40");
+  }
+}
+
+@keyframes wave-move-3 {
+  0%, 100% {
+    d: path("M0,40 Q35,25 70,40 T140,40 T210,40 T280,40");
+    opacity: 0.3;
+  }
+  50% {
+    d: path("M0,40 Q35,55 70,40 T140,40 T210,40 T280,40");
+    opacity: 0.6;
+  }
+}
